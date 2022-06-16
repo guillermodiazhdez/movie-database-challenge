@@ -1,42 +1,21 @@
+import { createEntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
-import { PopularMoviesResponse } from '../../models/popular-movies-response.model';
-import { PopularMovie } from '../../models/popular-movie.model';
-import {
-  getPopularMovies,
-  getPopularMoviesSuccess,
-} from '../actions/movies.actions';
+import { PopularMovie } from 'src/app/models/popular-movie.model';
+import { retrievedMovieList } from '../actions/movies.actions';
 
-export interface MovieState {
-  error: string | null;
-  status: 'pending' | 'loading' | 'error' | 'success';
-}
+// export const initialState: ReadonlyArray<PopularMovie> = [];
 
-export const initialState: MovieState = {
-  error: null,
-  status: 'pending',
-};
+export type PopularMovieState = EntityState<PopularMovie>;
 
-export const movieReducer = createReducer(
+export const movieAdapter = createEntityAdapter<PopularMovie>({
+  selectId: (movie) => movie.id,
+});
+
+const initialState = movieAdapter.getInitialState();
+
+export const moviesReducer = createReducer<PopularMovieState>(
   initialState,
-  // loading the popular movies
-  // on(getPopularMovies, (state) => ({ ...state, status: 'loading' })),
-  // Handle successfully loaded movies
-  on(
-    getPopularMoviesSuccess,
-    (state, { page, results, total_results, total_pages }) => ({
-      page: page,
-      results: results,
-      total_results: total_results,
-      total_pages: total_pages,
-      error: null,
-      status: 'success',
-    })
+  on(retrievedMovieList, (state, { movies }) =>
+    movieAdapter.addMany(movies, state)
   )
-
-  // // Handle todos load failure
-  // on(loadTodosFailure, (state, { error }) => ({
-  //   ...state,
-  //   error: error,
-  //   status: 'error',
-  // }))
 );

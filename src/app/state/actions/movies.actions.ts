@@ -1,7 +1,7 @@
-import { createAction } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
+import { PopularMovie } from 'src/app/models/popular-movie.model';
 
-export const getPopularMovies = createAction('[Movies] Load Popular Movies');
-export const getPopularMoviesSuccess = createAction(
-  '[Movies] Load Popular Movies Success',
-  (movies) => movies
+export const retrievedMovieList = createAction(
+  '[Movies list] Retrieve Popular Movies',
+  props<{ movies: PopularMovie[] }>()
 );

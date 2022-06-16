@@ -1,21 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { PopularMoviesResponse } from 'src/app/models/popular-movies-response.model';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { PopularMovie } from 'src/app/models/popular-movie.model';
 
 @Component({
   selector: 'movies-list',
   templateUrl: './movies-list.component.html',
   styleUrls: ['./movies-list.component.scss'],
 })
-export class MoviesListComponent implements OnInit {
-  movies$: Observable<PopularMoviesResponse> = this.store.select(
-    (state) => state.movies
-  );
-
-  constructor(private store: Store<{ movies: PopularMoviesResponse }>) {}
-
-  ngOnInit() {
-    this.store.dispatch({ type: '[Movies] Load Popular Movies' });
-  }
+export class MoviesListComponent {
+  @Input() movies: ReadonlyArray<PopularMovie> | null = [];
+  @Output() select = new EventEmitter<number>();
 }

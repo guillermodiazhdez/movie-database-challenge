@@ -2,8 +2,10 @@
   <app-header></app-header>
   <div class="movie-viewer-layout">
     <div class="sidebar" style="background-color: rgba(118, 123, 124, 0.365)">
-      <movies-list></movies-list>
+      <movies-list [movies]="movies$ | async"></movies-list>
     </div>
-    <div class="body" style="background-color: brown">2</div>
+    <div class="body" style="background-color: brown">
+      <router-outlet></router-outlet>
+    </div>
   </div>
 </section>

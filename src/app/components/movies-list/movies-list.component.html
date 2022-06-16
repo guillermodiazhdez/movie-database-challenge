@@ -1,9 +1,5 @@
-<div class="movies-list-item" *ngFor="let movie of (movies$ | async)?.results">
-  {{ movie.title }}
+<div class="movies-list-item" *ngFor="let movie of movies">
+  <a [routerLink]="movie.id.toString()">
+    {{ movie.title }}
+  </a>
 </div>
-
-<!-- <div *ngIf="(movies$ | async)?.results as movies">
-  <div *ngFor="let movie of movies">
-    <p>{{ movie.title }}</p>
-  </div>
-</div> -->
