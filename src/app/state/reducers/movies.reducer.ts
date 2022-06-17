@@ -1,7 +1,14 @@
 import { createEntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
 import { PopularMovie } from 'src/app/models/popular-movie.model';
-import { retrievedMovieList } from '../actions/movies.actions';
+import {
+  retrievedMovieList,
+  retrievedMovieListFiltered,
+} from '../actions/movies.actions';
+import {
+  selectMovies,
+  selectMoviesEntities,
+} from '../selectors/movie.selectors';
 
 // export const initialState: ReadonlyArray<PopularMovie> = [];
 
@@ -17,5 +24,11 @@ export const moviesReducer = createReducer<PopularMovieState>(
   initialState,
   on(retrievedMovieList, (state, { movies }) =>
     movieAdapter.addMany(movies, state)
+  ),
+  on(retrievedMovieListFiltered, (state, { movies, query }) =>
+    movieAdapter.setAll(
+      movies.filter((movie) => movie.title.includes(query)),
+      state
+    )
   )
 );

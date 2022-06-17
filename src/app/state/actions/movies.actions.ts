@@ -5,3 +5,8 @@ export const retrievedMovieList = createAction(
   '[Movies list] Retrieve Popular Movies',
   props<{ movies: PopularMovie[] }>()
 );
+
+export const retrievedMovieListFiltered = createAction(
+  '[Movies list] Search Popular Movie',
+  props<{ movies: PopularMovie[]; query: string }>()
+);

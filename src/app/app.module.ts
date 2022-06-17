@@ -13,6 +13,9 @@ import { HeaderComponent } from './components/header/header.component';
 
 import { StoreRouterConnectingModule, routerReducer } from '@ngrx/router-store';
 import { RouterModule } from '@angular/router';
+import { SearchComponent } from './components/search/search.component';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -21,11 +24,17 @@ import { RouterModule } from '@angular/router';
     MovieDescriptionComponent,
     MovieViewerComponent,
     HeaderComponent,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     StoreModule.forRoot({ movies: moviesReducer, router: routerReducer }),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, // Retains last 25 states
+      logOnly: environment.production, // Restrict extension to log-only mode
+      autoPause: true, // Pauses recording actions and state changes when the extension window is not open
+    }),
     RouterModule.forRoot([
       {
         path: ':movieId',
