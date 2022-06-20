@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { MoviesService } from 'src/app/services/movies.service';
 import { retrievedMovieList } from 'src/app/state/actions/movies.actions';
-import { selectMovies } from 'src/app/state/selectors/movie.selectors';
+import {
+  selectFilteredMovies,
+  selectMovies,
+} from 'src/app/state/selectors/movie.selectors';
 
 @Component({
   selector: 'movie-viewer',
@@ -19,5 +22,9 @@ export class MovieViewerComponent implements OnInit {
       .subscribe((movies) =>
         this.store.dispatch(retrievedMovieList({ movies }))
       );
+  }
+
+  onQueryCreated(query: string) {
+    this.movies$ = this.store.select(selectFilteredMovies(query));
   }
 }
