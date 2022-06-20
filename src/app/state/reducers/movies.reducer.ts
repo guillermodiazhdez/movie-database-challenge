@@ -5,12 +5,6 @@ import {
   retrievedMovieList,
   retrievedMovieListFiltered,
 } from '../actions/movies.actions';
-import {
-  selectMovies,
-  selectMoviesEntities,
-} from '../selectors/movie.selectors';
-
-// export const initialState: ReadonlyArray<PopularMovie> = [];
 
 export type PopularMovieState = EntityState<PopularMovie>;
 
@@ -28,7 +22,7 @@ export const moviesReducer = createReducer<PopularMovieState>(
   on(retrievedMovieListFiltered, (state, { movies, query }) =>
     movieAdapter.setAll(
       movies.filter((movie) => movie.title.includes(query)),
-      state
+      { ...state }
     )
   )
 );

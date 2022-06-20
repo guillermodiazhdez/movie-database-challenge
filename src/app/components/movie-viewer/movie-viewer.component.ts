@@ -11,7 +11,6 @@ import { selectMovies } from 'src/app/state/selectors/movie.selectors';
 })
 export class MovieViewerComponent implements OnInit {
   movies$ = this.store.select(selectMovies);
-
   constructor(private moviesService: MoviesService, private store: Store) {}
 
   ngOnInit() {

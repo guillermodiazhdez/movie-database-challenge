@@ -20,3 +20,8 @@ export const selectMovie = createSelector(
   selectRouteParams,
   (movies, { movieId }) => movies[movieId]
 );
+
+export const selectFilteredMovies = (title: string) =>
+  createSelector(selectMovies, (movies) =>
+    movies.filter((movie) => movie.title.includes(title))
+  );

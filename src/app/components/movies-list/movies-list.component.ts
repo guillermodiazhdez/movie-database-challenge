@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { PopularMovie } from 'src/app/models/popular-movie.model';
 
 @Component({
@@ -8,5 +8,4 @@ import { PopularMovie } from 'src/app/models/popular-movie.model';
 })
 export class MoviesListComponent {
   @Input() movies: ReadonlyArray<PopularMovie> | null = [];
-  @Output() select = new EventEmitter<number>();
 }
