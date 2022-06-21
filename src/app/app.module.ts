@@ -16,6 +16,8 @@ import { RouterModule } from '@angular/router';
 import { SearchComponent } from './components/search/search.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environment';
+import { EffectsModule } from '@ngrx/effects';
+import { MoviesEffects } from './state/effects/movies.effects';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,7 @@ import { environment } from 'src/environments/environment';
   imports: [
     BrowserModule,
     HttpClientModule,
+    EffectsModule.forRoot([MoviesEffects]),
     StoreModule.forRoot({ movies: moviesReducer, router: routerReducer }),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states

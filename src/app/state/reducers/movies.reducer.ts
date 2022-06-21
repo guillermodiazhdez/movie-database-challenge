@@ -1,7 +1,10 @@
 import { createEntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
 import { PopularMovie } from 'src/app/models/popular-movie.model';
-import { retrievedMovieList } from '../actions/movies.actions';
+import {
+  loadMoviesSuccess,
+  retrievedMovieList,
+} from '../actions/movies.actions';
 
 export type PopularMovieState = EntityState<PopularMovie>;
 
@@ -13,7 +16,7 @@ const initialState = movieAdapter.getInitialState();
 
 export const moviesReducer = createReducer<PopularMovieState>(
   initialState,
-  on(retrievedMovieList, (state, { movies }) =>
+  on(loadMoviesSuccess, (state, { movies }) =>
     movieAdapter.addMany(movies, state)
   )
 );
