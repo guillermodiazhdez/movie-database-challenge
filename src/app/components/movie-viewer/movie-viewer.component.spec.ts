@@ -2,15 +2,14 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MovieViewerComponent } from './movie-viewer.component';
 
-describe('MovieViewerComponent', () => {
+xdescribe('MovieViewerComponent', () => {
   let component: MovieViewerComponent;
   let fixture: ComponentFixture<MovieViewerComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MovieViewerComponent ]
-    })
-    .compileComponents();
+      declarations: [MovieViewerComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(MovieViewerComponent);
     component = fixture.componentInstance;

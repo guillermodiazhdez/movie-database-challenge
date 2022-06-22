@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { MoviesService } from 'src/app/services/movies.service';
-import {
-  loadMovies,
-  retrievedMovieList,
-} from 'src/app/state/actions/movies.actions';
+import { loadMovies } from 'src/app/state/actions/movies.actions';
 import {
   selectFilteredMovies,
   selectMovies,
